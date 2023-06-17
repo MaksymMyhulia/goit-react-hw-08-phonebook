@@ -1,8 +1,10 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, isAnyOf } from '@reduxjs/toolkit';
+
 import {
+  fetchContacts,
   addContact,
   deleteContact,
-  fetchContacts,
+  changeContact,
 } from './contactsOperations';
 
 const initialState = {
@@ -11,51 +13,69 @@ const initialState = {
   error: null,
 };
 
-const contactsSlice = createSlice({
-  // Ім'я слайсу
-  name: 'contacts',
-  // Початковий стан редюсера слайсу
-  initialState,
-  // Об'єкт редюсерів
-  extraReducers: {
-    [fetchContacts.pending](state) {
-      state.isLoading = true;
-    },
-    [fetchContacts.fulfilled](state, action) {
-      state.items = action.payload;
-      state.isLoading = false;
-    },
-    [fetchContacts.rejected](state, action) {
-      state.isLoading = false;
-      state.error = action.payload;
-    },
-    /////////////////////////////////////////////////
+const customArrThunks = [
+  fetchContacts,
+  addContact,
+  deleteContact,
+  changeContact,
+];
 
-    [addContact.pending](state) {
-      state.isLoading = true;
-    },
-    [addContact.fulfilled](state, action) {
-      state.items.push(action.payload);
-      state.isLoading = false;
-    },
-    [addContact.rejected](state, action) {
-      state.isLoading = false;
-      state.error = action.payload;
-    },
-    //////////////////////////////////////////////////
-    [deleteContact.pending](state) {
-      state.isLoading = true;
-    },
-    [deleteContact.fulfilled](state, action) {
-      state.items = state.items.filter(item => item.id !== action.payload.id);
-      state.isLoading = false;
-    },
-    [deleteContact.rejected](state, action) {
-      state.isLoading = false;
-      state.error = action.payload;
-    },
+const status = {
+  pending: 'pending',
+  fulfilled: 'fulfilled',
+  rejected: 'rejected',
+};
+
+const fn = status => customArrThunks.map(el => el[status]);
+
+const handlePending = state => {
+  state.isLoading = true;
+  state.error = null;
+};
+
+const handleRejected = (state, { payload }) => {
+  state.isLoading = false;
+  state.error = payload;
+};
+
+const handleFulfilled = state => {
+  state.isLoading = false;
+  state.error = null;
+};
+
+const handleFulfilledGet = (state, { payload }) => {
+  state.items = payload;
+};
+
+const handleFulfilledAdd = (state, { payload }) => {
+  state.items.push(payload);
+};
+
+const handleFulfilledDelete = (state, { payload }) => {
+  state.items = state.items.filter(({ id }) => id !== payload);
+};
+
+const handleFulfilledChange = (state, { payload }) => {
+  const index = state.items.findIndex(({ id }) => id === payload.id);
+  if (index !== -1) {
+    state.items[index] = payload;
+  }
+};
+
+const contactsSlice = createSlice({
+  name: 'contacts',
+  initialState,
+  extraReducers: builder => {
+    const { pending, fulfilled, rejected } = status;
+    builder
+      .addCase(fetchContacts.fulfilled, handleFulfilledGet)
+      .addCase(addContact.fulfilled, handleFulfilledAdd)
+      .addCase(deleteContact.fulfilled, handleFulfilledDelete)
+      .addCase(changeContact.fulfilled, handleFulfilledChange)
+      .addMatcher(isAnyOf(...fn(pending)), handlePending)
+      .addMatcher(isAnyOf(...fn(fulfilled)), handleFulfilled)
+      .addMatcher(isAnyOf(...fn(rejected)), handleRejected);
   },
 });
 
-// Редюсер слайсу
 export default contactsSlice.reducer;

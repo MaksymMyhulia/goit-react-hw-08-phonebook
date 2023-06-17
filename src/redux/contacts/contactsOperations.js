@@ -1,15 +1,15 @@
-import axios from 'axios';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { toast } from 'react-toastify';
 import { toastifyOptions } from 'utils/toastifyOptions';
 
-axios.defaults.baseURL = 'https://647c5422c0bae2880ad09404.mockapi.io';
+import * as api from 'api/contactsServices';
+
 
 export const fetchContacts = createAsyncThunk(
   'contacts/fetchAll',
   async (_, thunkApi) => {
     try {
-      const { data } = await axios.get('/contacts');
+      const { data } = await api.getAllContacts();
       return data;
     } catch (error) {
       return thunkApi.rejectWithValue(error.message);
@@ -33,15 +33,15 @@ const isDublicate = (contacts, { name, phone }) => {
 
 export const addContact = createAsyncThunk(
   'contacts/addContact',
-  async (contacts, thunkApi) => {
+  async (data, { rejectWithValue }) => {
     try {
-      const { data } = await axios.post('/contacts', contacts);
+      const { data: result } = await api.addContact(data);
       toast.success('Add contact', {
         position: 'bottom-right',
       });
-      return data;
+      return result;
     } catch (error) {
-      return thunkApi.rejectWithValue(error.message);
+      return rejectWithValue(error.message);
     }
   },
   {
@@ -60,15 +60,30 @@ export const addContact = createAsyncThunk(
 
 export const deleteContact = createAsyncThunk(
   'contacts/deleteContact',
-  async (id, thunkApi) => {
+  async (id, { rejectWithValue }) => {
     try {
-      const { data } = await axios.delete(`/contacts/${id}`);
+      await api.deleteContact(id);
       toast.success('Contact delete', {
         position: 'bottom-right',
       });
-      return data;
+      return id;
     } catch (error) {
-      return thunkApi.rejectWithValue(error.message);
+      return rejectWithValue(error.message);
+    }
+  }
+);
+
+export const changeContact = createAsyncThunk(
+  'contacts/editContact',
+  async (data, { rejectWithValue }) => {
+    try {
+      const { data: result } = await api.editContact(data);
+      toast.success('Contact update', {
+        position: 'bottom-right',
+      });
+      return result;
+    } catch (error) {
+      return rejectWithValue(error.message);
     }
   }
 );
