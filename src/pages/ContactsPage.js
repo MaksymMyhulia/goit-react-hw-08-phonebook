@@ -10,7 +10,6 @@ const Contacts = () => {
       <ContactForm />
       <Header title="Contacts" />
       <Filter />
-      {isLoading && !error && <b>Request in progress...</b>}
       <ContactList />
     </Section>
   );
