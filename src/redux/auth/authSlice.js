@@ -6,7 +6,7 @@ import {
   logInUser,
   logOutUser,
   getCurrentUser,
-} from './auth-operations';
+} from './authOperations';
 
 import persistReducer from 'redux-persist/es/persistReducer';
 

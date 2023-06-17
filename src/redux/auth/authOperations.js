@@ -6,7 +6,7 @@ import {
   userSignUp,
   userLogout,
   userCurrent,
-} from 'shared/api/authServices';
+} from 'api/authServices';
 
 export const registerUser = createAsyncThunk(
   'auth/register',
