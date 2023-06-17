@@ -1,13 +1,24 @@
 {
   "files": {
-    "main.css": "/goit-react-hw-08-phonebook/static/css/main.505499bf.css",
-    "main.js": "/goit-react-hw-08-phonebook/static/js/main.b26110ae.js",
+    "main.css": "/goit-react-hw-08-phonebook/static/css/main.379b3ee2.css",
+    "main.js": "/goit-react-hw-08-phonebook/static/js/main.1563ebfc.js",
+    "static/js/206.b2889017.chunk.js": "/goit-react-hw-08-phonebook/static/js/206.b2889017.chunk.js",
+    "static/js/340.398b7ee8.chunk.js": "/goit-react-hw-08-phonebook/static/js/340.398b7ee8.chunk.js",
+    "static/js/588.c4ba20b6.chunk.js": "/goit-react-hw-08-phonebook/static/js/588.c4ba20b6.chunk.js",
+    "static/js/186.9501afab.chunk.js": "/goit-react-hw-08-phonebook/static/js/186.9501afab.chunk.js",
+    "static/js/791.040b705b.chunk.js": "/goit-react-hw-08-phonebook/static/js/791.040b705b.chunk.js",
+    "static/js/568.32ca5001.chunk.js": "/goit-react-hw-08-phonebook/static/js/568.32ca5001.chunk.js",
+    "static/media/logobook.png": "/goit-react-hw-08-phonebook/static/media/logobook.3d030576258629c0dd90.png",
     "index.html": "/goit-react-hw-08-phonebook/index.html",
-    "main.505499bf.css.map": "/goit-react-hw-08-phonebook/static/css/main.505499bf.css.map",
-    "main.b26110ae.js.map": "/goit-react-hw-08-phonebook/static/js/main.b26110ae.js.map"
+    "main.379b3ee2.css.map": "/goit-react-hw-08-phonebook/static/css/main.379b3ee2.css.map",
+    "main.1563ebfc.js.map": "/goit-react-hw-08-phonebook/static/js/main.1563ebfc.js.map",
+    "206.b2889017.chunk.js.map": "/goit-react-hw-08-phonebook/static/js/206.b2889017.chunk.js.map",
+    "340.398b7ee8.chunk.js.map": "/goit-react-hw-08-phonebook/static/js/340.398b7ee8.chunk.js.map",
+    "791.040b705b.chunk.js.map": "/goit-react-hw-08-phonebook/static/js/791.040b705b.chunk.js.map",
+    "568.32ca5001.chunk.js.map": "/goit-react-hw-08-phonebook/static/js/568.32ca5001.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.505499bf.css",
-    "static/js/main.b26110ae.js"
+    "static/css/main.379b3ee2.css",
+    "static/js/main.1563ebfc.js"
   ]
 }
