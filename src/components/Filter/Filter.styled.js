@@ -1,4 +1,4 @@
-import styled from "@emotion/styled";
+import styled from "styled-components";
  
 
 export const LabelDescription = styled.label`
@@ -26,7 +26,7 @@ export const LabelDescription = styled.label`
  `;
  
  export const LabelWrapper = styled.div`
- display; flex;
+ display: flex;
  gap: ${({theme}) => theme.space[3]}px;
  margin-left: ${({theme}) => theme.space[3]}px;
  `;

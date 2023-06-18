@@ -21,17 +21,17 @@ const schema = Yup.object().shape({
       /^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$/,
       "Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
     )
-    .required('Required'),
-  phone: Yup.string()
+    .required(),
+  number: Yup.string()
     .matches(
       /\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}/,
       'Phone number must be digits and can contain spaces, dashes, parentheses and can start with +'
     )
     .trim()
-    .required('Required'),
+    .required(),
 });
 
-const initialValues = { name: '', phone: '' };
+const initialValues = { name: '', number: '' };
 
 export const ContactForm = () => {
   const dispatch = useDispatch();
@@ -66,7 +66,7 @@ export const ContactForm = () => {
           <LabelWrapper>Number</LabelWrapper>
           <FormikField
             type="tel"
-            name="phone"
+            name="number"
             pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
             title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
             required

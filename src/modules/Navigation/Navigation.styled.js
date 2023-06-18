@@ -12,7 +12,7 @@ export const NavLink = styled(Link)`
  padding: 10px;
   border-radius: 4px;
   text-decoration: none;
-  color: ${({ theme }) => theme.text};
+  color: ${({ theme }) => theme.colors.black};
   font-size: ${props => props.theme.fontSizes.s};
 
   font-weight: 500;

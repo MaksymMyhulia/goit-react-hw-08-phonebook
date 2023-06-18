@@ -7,9 +7,3 @@ export const addContact = contact =>
 
 export const deleteContact = id => authInstance.delete(`/contacts/${id}`);
 
-export const editContact = contact => {
-  return authInstance.patch(`/contacts/${contact.id}`, {
-    name: contact.name,
-    number: contact.number,
-  });
-};

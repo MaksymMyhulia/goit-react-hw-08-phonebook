@@ -1,4 +1,4 @@
-import styled from "@emotion/styled"
+import styled from "styled-components"
 
 export const SectionStyled = styled.section`
 display: flex;
@@ -12,4 +12,7 @@ max-width: 100%;
 
 background-color: ${({theme}) => theme.colors.white};
 box-shadow: ${({theme}) => theme.shadows.normal};
+margin-top: 65px;
+margin-left: auto;
+margin-right: auto;
 `;

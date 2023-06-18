@@ -18,7 +18,7 @@ export const LinkNav = styled(NavLink)`
 
 export const AppBar = styled(HeaderBlock)`
   position: fixed;
-  padding-bottom: ${({ theme }) => theme.space[3]}px;
+  padding-bottom: ${({theme}) => theme.space[3]}px;
   padding-left: ${({ theme }) => theme.space[4]}px;
   padding-right: ${({ theme }) => theme.space[4]}px;
   margin-bottom: 30px;

@@ -1,4 +1,5 @@
 import { useDispatch, useSelector } from 'react-redux';
+import PropTypes from 'prop-types';
 
 import { toast } from 'react-toastify';
 import { toastifyOptions } from 'utils/toastifyOptions';
@@ -42,11 +43,11 @@ export const ContactList = () => {
       {isLoading && contacts.length === 0 && <Loader />}
       {error && !isLoading && <div>Ooops, error...</div>}
       <List>
-        {filteredContacts.map(({ name, phone, id }) => {
+        {filteredContacts.map(({ name, number, id }) => {
           return (
             <Item key={id}>
               <span>{name}:</span>
-              <span>{phone}</span>
+              <span>{number}</span>
 
               <DeleteBtn
                 type="button"
@@ -60,4 +61,10 @@ export const ContactList = () => {
       </List>
     </>
   );
+};
+
+ContactList.propTypes = {
+  name: PropTypes.string.isRequired,
+  number: PropTypes.string.isRequired,
+  id: PropTypes.string.isRequired,
 };

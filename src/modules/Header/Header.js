@@ -67,11 +67,11 @@ const Header = () => {
 
   return (
     <ThemeProvider theme={defaultTheme}>
-      <Box component={'header'} sx={{ position: 'relative', height: '44px' }}>
+      <Box component={'header'} sx={{ position: 'relative', height: '45px' }}>
         <AppBar
           component={'nav'}
           sx={{
-            background: '#ffffff',
+            background: '#D9D9F3',
             backdropFilter: 'blur(7.5px)',
             position: 'relative',
           }}

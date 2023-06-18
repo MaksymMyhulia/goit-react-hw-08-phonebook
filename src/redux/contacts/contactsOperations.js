@@ -1,32 +1,33 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
+
 import { toast } from 'react-toastify';
 import { toastifyOptions } from 'utils/toastifyOptions';
 
 import * as api from 'api/contactsServices';
 
-
 export const fetchContacts = createAsyncThunk(
-  'contacts/fetchAll',
-  async (_, thunkApi) => {
+  'contacts/getAll',
+  async (_, thunkAPI) => {
     try {
       const { data } = await api.getAllContacts();
       return data;
-    } catch (error) {
-      return thunkApi.rejectWithValue(error.message);
+    } catch ({ response }) {
+      return thunkAPI.rejectWithValue(
+        `Ooops! Wrong... Try again or update browser`
+      );
     }
   }
 );
 
 
-// Функція, що перевіряє дублювання
-const isDublicate = (contacts, { name, phone }) => {
+const isDublicate = (contacts, { name, number }) => {
   const normalizedName = name.toLowerCase().trim();
-  const normalizedNumber = phone.trim();
+  const normalizedNumber = number.trim();
 
   const dublicate = contacts.some(
     contact =>
       contact.name.toLowerCase().trim() === normalizedName ||
-      contact.phone.trim() === normalizedNumber
+      contact.number.trim() === normalizedNumber
   );
   return dublicate;
 };
@@ -40,10 +41,11 @@ export const addContact = createAsyncThunk(
         position: 'bottom-right',
       });
       return result;
-    } catch (error) {
-      return rejectWithValue(error.message);
+    } catch ({ response }) {
+      return rejectWithValue(`Ooops! Wrong... Try again or update browser`);
     }
   },
+  
   {
     condition: (data, { getState }) => {
       const {
@@ -52,7 +54,7 @@ export const addContact = createAsyncThunk(
 
       if (isDublicate(items, data)) {
         toast.error(`This contact is already in contacts`, toastifyOptions);
-        return false; // якщо false  - запит преривається і не відбувається, в іншому випадку - запит продовжиться
+        return false;
       }
     },
   }
@@ -67,24 +69,8 @@ export const deleteContact = createAsyncThunk(
         position: 'bottom-right',
       });
       return id;
-    } catch (error) {
-      return rejectWithValue(error.message);
+    } catch ({ response }) {
+      return rejectWithValue(`Ooops! Wrong... Try again or update browser`);
     }
   }
 );
-
-export const changeContact = createAsyncThunk(
-  'contacts/editContact',
-  async (data, { rejectWithValue }) => {
-    try {
-      const { data: result } = await api.editContact(data);
-      toast.success('Contact update', {
-        position: 'bottom-right',
-      });
-      return result;
-    } catch (error) {
-      return rejectWithValue(error.message);
-    }
-  }
-);
-

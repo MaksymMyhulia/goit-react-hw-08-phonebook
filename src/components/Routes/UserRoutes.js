@@ -13,7 +13,7 @@ const PageNotFound = lazy(() => import('pages/NotFoundPage'));
 
 const UserRoutes = () => {
   return (
-    <Suspense fallback={Loader}>
+    <Suspense fallback={<Loader />}>
       <Routes>
         <Route path="/" element={<SharedLayout  />}>
           <Route index element={<HomePage />} />
